@@ -1,11 +1,12 @@
 <app-header></app-header>
-<div class="login-container container my-5">
+
+<main>
+  <div class="login-container container my-5">
     <h2 class="text-center mt-3">Login</h2>
     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
       <div class="form-group mb-3 mt-5">
         <label for="email">Email</label>
         <input type="email" id="email" class="form-control" formControlName="email" required>
-        
       </div>
       <div class="form-group mb-3">
         <label for="password">Password</label>
@@ -21,5 +22,7 @@
       </div>
     </form>
   </div>
-  <app-footer></app-footer>
+</main>
+
+<app-footer></app-footer>
   

@@ -1,10 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-homepage',
+  selector: 'app-home-page',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
 })
-export class HomepageComponent {
-
+export class HomePageComponent {
+  
+  constructor(){
+  }
 }

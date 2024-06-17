@@ -9,15 +9,5 @@ import { Input } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend-taskManager';
-  users : any = []
-  constructor(private authService : AuthService) {
-    
-  }
   @Input() isLoggedIn: boolean = false;
-  
-  ngOnInit(){
-   this.authService.getUsers()
-      .subscribe((arg :any )=> this.users.push(arg));
-      console.log(this.users)
-  }
 }

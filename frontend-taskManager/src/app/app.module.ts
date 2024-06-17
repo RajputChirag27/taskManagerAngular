@@ -8,7 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomepageComponent } from './homepage/homepage.component';
+import { HomePageComponent } from './homepage/homepage.component';
 import { AuthService } from 'src/services/auth.service';
 import { TokenInterceptorService } from 'src/services/token-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -20,7 +20,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     SignupComponent,
-    HomepageComponent
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
