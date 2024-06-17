@@ -1,0 +1,90 @@
+<nav class="navbar navbar-dark bg-black">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="homepage">Sasta Website</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+            Sasta Form
+          </h5>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <div  *ngIf="isLoggedIn else isNotLoggedIn">
+            
+
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item"> <a routerLink="user-profile" class="nav-link">Profile</a>  </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                routerLink="homepage"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="homepage/testForm">Form</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="homepage/about-us">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="homepage/results">Products</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input  
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-primary" type="submit">
+              Search
+            </button>
+          </form>
+          <div class="container d-flex justify-content-center">
+            <button class="btn btn-primary mt-3" (click)="logout()">Logout</button>
+          </div>
+        </div>
+        <ng-template #isNotLoggedIn>
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li>
+              <button
+              class=" btn btn-primary "
+              aria-current="page"
+              routerLink="/login"
+              >Login</button>
+            </li>
+            <li>
+              <button
+              class=" btn btn-primary mt-3"
+              aria-current="page"
+              routerLink="/signup"
+              >Signup</button>
+            </li>
+          </ul>
+        </ng-template>
+        </div>
+      </div>
+    </div>
+  </nav>
