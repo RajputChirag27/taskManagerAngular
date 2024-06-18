@@ -28,27 +28,27 @@
           ></button>
         </div>
         <div class="offcanvas-body">
-          <div  *ngIf="isLoggedIn else isNotLoggedIn">
+          <div  *ngIf="isLoggedInn else isNotLoggedIn">
             
 
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item"> <a routerLink="user-profile" class="nav-link">Profile</a>  </li>
+            <li class="nav-item"> <a routerLink="/user-profile" class="nav-link">Profile</a>  </li>
             <li class="nav-item">
               <a
                 class="nav-link active"
                 aria-current="page"
-                routerLink="homepage"
+                routerLink="/homepage"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="homepage/testForm">Task Manager</a>
+              <a class="nav-link" routerLink="/taskManager">Task Manager</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="homepage/about-us">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="homepage/results">DashBoard</a>
+              <a class="nav-link" routerLink="/dashboard">DashBoard</a>
             </li>
           </ul>
           <form class="d-flex">

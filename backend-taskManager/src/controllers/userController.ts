@@ -15,6 +15,7 @@ import { ApiHandler } from "../handlers/apiHandler";
 import { CustomError } from "../helpers";
 import { statusCode } from "../constants";
 import { AuthRequest, IUser } from "../interfaces";
+// import { AuthMiddleware } from "../middlewares";
 
 @controller("/user")
 export class UserController {
@@ -34,6 +35,21 @@ export class UserController {
       if (!res.headersSent) errorHandler(req, res, next, err);
     }
   }
+
+  @httpGet("/profile", TYPES.AuthMiddleware)
+  async getUsersProfile(req: AuthRequest, res: Response, next: NextFunction) {
+    try {
+      const id = req.user._id;
+      console.log(id);
+      const user = await this._userService.getUsersById(id);
+      if (user) {
+        res.send(new ApiHandler(user, "User Profile Fetched Successfully"));
+      }
+    } catch (err) {
+      if (!res.headersSent) errorHandler(req, res, next, err);
+    }
+  }
+
 
   @httpGet("/protected", TYPES.AuthMiddleware)
   public async protected(req: AuthRequest, res: Response, next: NextFunction) {
@@ -83,7 +99,16 @@ export class UserController {
       const { email, password } = req.body;
       const jwtToken = await this._userService.login(email, password);
       req.headers.authorization = `Bearer ${jwtToken}`;
-      if (jwtToken) res.send({ jwtToken, verified: true });
+      if (!jwtToken){
+        throw new CustomError(
+          "User Not Verified",
+          statusCode.UNAUTHORIZED,
+          "Please Login Again or Create New Account",
+        );
+      }
+        else {
+          res.send({ jwtToken, verified: true, message: "User Logged In Successfully" }); 
+      }
     } catch (err) {
       if (!res.headersSent) errorHandler(req, res, next, err);
     }

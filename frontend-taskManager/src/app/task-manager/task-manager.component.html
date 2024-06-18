@@ -1,0 +1,60 @@
+<div class="container mt-5">
+    <form [formGroup]="addTask" (ngSubmit)="onSubmit()">
+        <div class="container-fluid d-flex justify-content-center">
+            <h1 class="my-3 text-white">TASK</h1>
+        </div>
+      <div class="row">
+        <div class="col-lg-12 mt-5">
+          <div class="form-group">
+            <label for="title">TITLE</label>
+            <input type="text" class="form-control" formControlName="title"
+              [class.is-invalid]="addTask.get('title')?.invalid && addTask.get('title')?.touched">
+            <div *ngIf="addTask.get('title')?.invalid && addTask.get('title')?.touched">
+              <div *ngIf="addTask.get('title')?.errors?.['required']" class="text-danger">
+                Title is required
+              </div>
+              <div *ngIf="addTask.get('title')?.errors?.['pattern']" class="text-danger">
+                Title can only contain characters
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="form-group">
+            <label for="description">DESCRIPTION</label>
+            <input type="text" class="form-control" formControlName="description"
+              [class.is-invalid]="addTask.get('description')?.invalid && addTask.get('description')?.touched">
+            <div *ngIf="addTask.get('description')?.invalid && addTask.get('description')?.touched">
+              <div *ngIf="addTask.get('description')?.errors?.['required']" class="text-danger">
+                Description is required
+              </div>
+              <div *ngIf="addTask.get('description')?.errors?.['pattern']" class="text-danger">
+                Description must be at least 15 characters
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="form-group">
+            <label for="status">STATUS</label>
+            <select class="form-control" formControlName="status"
+              [class.is-invalid]="addTask.get('status')?.invalid && addTask.get('status')?.touched">
+              <option value="" disabled selected>Select One</option>
+              <option value="completed">COMPLETED</option>
+              <option value="pending">PENDING</option>
+              <option value="in-progress">IN-PROGRESS</option>
+            </select>
+            <div *ngIf="addTask.get('status')?.invalid && addTask.get('status')?.touched">
+              <div *ngIf="addTask.get('status')?.errors?.['required']" class="text-danger">
+                Status is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 my-5">
+          <button type="submit" class="btn btn-primary">ADD</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

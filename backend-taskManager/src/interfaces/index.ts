@@ -1,3 +1,4 @@
 import { AuthRequest } from "./IAuth";
 import { IUser } from "./IUser";
-export { AuthRequest, IUser };
+import { ITask } from "./ITask";
+export { AuthRequest, IUser,ITask };

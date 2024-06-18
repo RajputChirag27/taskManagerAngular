@@ -55,4 +55,8 @@ export class UserService {
     }
     return null;
   }
+
+  async getUsersById(id : string){
+    return await User.findById(id).exec();
+  }
 }

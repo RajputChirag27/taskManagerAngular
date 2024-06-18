@@ -1,0 +1,41 @@
+/* Center the form vertically */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Style for form headings */
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  /* Form styling */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  /* Error message styling */
+  .text-danger {
+    font-size: 0.875rem; /* 14px */
+    margin-top: 0.25rem;
+  }
+  
+  /* Optional: Add margin-top to first form-group */
+  .form-group:first-of-type {
+    margin-top: 1rem;
+  }
+  
+  /* Optional: Increase space between columns */
+  
+  /* Optional: Adjust button style */
+  .btn-primary {
+    width: 100%; /* Full width button */
+  }
+  
+  /* Optional: Additional styles for invalid fields */
+  .is-invalid {
+    border-color: #dc3545; /* Red border for invalid fields */
+  }
+  

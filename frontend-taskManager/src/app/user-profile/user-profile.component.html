@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="container-fluid d-flex justify-content-center">
+            <img class="card-img-top img-fluid m-5 rounded-5 profile-pic" style="max-width: 20rem; max-height: 25rem;" [src]="result.profilePicture" alt="Profile Picture">
+        </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ result.username }}</h5>
+        <p class="card-text mt-3"><strong>Email: </strong>{{ result.email }}</p>
+        <p class="card-text"><strong>Role: </strong> {{ result.role }}</p>
+      </div>
+      <!-- <ul class="list-group list-group-flush">
+        <li class="list-group-item">User ID: {{ result._id }}</li>
+        <li class="list-group-item">Is Active: {{ result.isActive ? 'Yes' : 'No' }}</li>
+        <li class="list-group-item">Is Deleted: {{ result.isDeleted ? 'Yes' : 'No' }}</li>
+        <li class="list-group-item">Is Blocked: {{ result.isBlocked ? 'Yes' : 'No' }}</li>
+      </ul> -->
+      <div class="card-body">
+        <button class="card-link btn btn-primary">Edit Profile</button>
+        <button class="card-link btn btn-primary">Change Password</button>
+      </div>
+    </div>
+  </div>
+  

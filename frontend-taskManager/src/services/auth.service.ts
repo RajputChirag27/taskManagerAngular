@@ -1,52 +1,56 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private loginUrl = 'http://localhost:3000/api/v1/user/login';
   private usersUrl = 'http://localhost:3000/api/v1/user';
+  private authToken = new BehaviorSubject<string | null>(this.getToken());
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }),
-      withCredentials: true
+      withCredentials: true,
     };
 
-    return this.http.post<any>(this.loginUrl, { email, password }, httpOptions)
+    return this.http
+      .post<any>(this.loginUrl, { email, password }, httpOptions)
       .pipe(
+        tap((response) => {
+          this.setToken(response.jwtToken);
+        }),
         catchError(this.handleError)
       );
   }
 
   setToken(token: string): void {
     localStorage.setItem('authToken', token);
+    this.authToken.next(token);
   }
 
   getToken(): string | null {
     return localStorage.getItem('authToken');
   }
 
-  isLoggedIn(): boolean {
-    return this.getToken() !== null;
+  isLoggedIn(): Observable<boolean> {
+    return this.authToken.asObservable().pipe(map((token: any) => !!token));
   }
 
   logout(): void {
     localStorage.removeItem('authToken');
+    this.authToken.next(null);
   }
 
   getUsers(): Observable<any> {
-    return this.http.get<any>(this.usersUrl)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.http.get<any>(this.usersUrl).pipe(catchError(this.handleError));
   }
 
   private handleError(error: any): Observable<never> {

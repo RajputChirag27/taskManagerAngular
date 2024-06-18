@@ -12,6 +12,11 @@ import { HomePageComponent } from './homepage/homepage.component';
 import { AuthService } from 'src/services/auth.service';
 import { TokenInterceptorService } from 'src/services/token-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { TaskManagerComponent } from './task-manager/task-manager.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +25,18 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     SignupComponent,
-    HomePageComponent
+    HomePageComponent,
+    TaskManagerComponent,
+    UserProfileComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,

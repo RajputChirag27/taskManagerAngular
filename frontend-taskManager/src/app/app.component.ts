@@ -9,5 +9,9 @@ import { Input } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend-taskManager';
-  @Input() isLoggedIn: boolean = false;
+
+
+  constructor(private readonly _authService : AuthService){
+
+  }
 }
