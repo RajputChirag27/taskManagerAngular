@@ -29,7 +29,7 @@ export class AuthMiddleware extends BaseMiddleware {
       const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
 
       const user = await User.findById(decoded.id);
-
+      console.log(user)
       if (!user) {
         return errorHandler(
           req,

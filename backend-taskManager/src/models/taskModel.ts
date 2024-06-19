@@ -14,6 +14,11 @@ const TaskSchema = new Schema<ITask>({
       type: String,
       enum: ['pending', 'in-progress', 'completed'],
       default: 'pending'
+    },
+    creatorId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
     }
   }, {
     timestamps: true

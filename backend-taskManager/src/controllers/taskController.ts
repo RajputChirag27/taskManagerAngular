@@ -7,6 +7,8 @@ import { ApiHandler } from '../handlers/apiHandler';
 import { CustomError } from '../helpers';
 import { statusCode } from '../constants';
 import { errorHandler } from '../handlers';
+import { AuthMiddleware } from '../middlewares';
+import { AuthRequest } from '../interfaces';
 @controller('/tasks')
 export class TaskController {
   constructor(@inject(TYPES.TaskService) private taskService: ITaskService) {}
@@ -17,20 +19,25 @@ export class TaskController {
     res.json(tasks);
   }
 
-  @httpGet('/:id')
-  public async getTaskById(req: Request, res: Response): Promise<void> {
-    const id = req.params.id;
-    const task = await this.taskService.getTaskById(id);
-    if (task) {
-      res.json(task);
-    } else {
-      res.status(404).send('Task not found');
+  @httpGet('/tasksUser',TYPES.AuthMiddleware)
+  public async getAllTasksByUser(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
+    try{
+      console.log("hello")
+      console.log(req.user._id);
+      const id = req.user._id;
+      console.log(id)
+      const tasks = await this.taskService.getAllTasksByUser(id);
+      res.json(tasks);
+    }catch(err){
+      if (!res.headersSent) errorHandler(req, res, next, err);
     }
-  }
 
-  @httpPost('')
-  public async createTask(req: Request, res: Response): Promise<void> {
-    const task = await this.taskService.createTask(req.body);
+  }
+  
+  @httpPost('', TYPES.AuthMiddleware)
+  public async createTask(req: AuthRequest, res: Response): Promise<void> {
+    const id = req.user._id;
+    const task = await this.taskService.createTask(req.body,id);
     res.status(201).json(task);
   }
 
@@ -44,6 +51,24 @@ export class TaskController {
       res.status(404).send('Task not found');
     }
   }
+
+  
+  @httpGet('/:id')
+  public async getTaskById(req: Request, res: Response, next : NextFunction): Promise<void> {
+    try{
+      const id = req.params.id;
+      const task = await this.taskService.getTaskById(id);
+      if (task) {
+        res.json(task);
+      } else {
+        res.status(404).send('Task not found');
+      }
+    }
+    catch(err){
+      if (!res.headersSent) errorHandler(req, res, next, err);
+    }
+  }
+
 
   @httpDelete('/:id')
   public async deleteTask(req: Request, res: Response, next : NextFunction): Promise<void> {

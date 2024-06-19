@@ -10,6 +10,7 @@ export const errorHandler = (
   err: any,
 ) => {
   try {
+    console.log(err)
     console.log(
       "Custom Error Handler => ",
       err.name,

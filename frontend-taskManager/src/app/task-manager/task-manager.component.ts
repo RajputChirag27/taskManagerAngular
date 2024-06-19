@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TaskService } from 'src/services/task.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-task-manager',
   templateUrl: './task-manager.component.html',
@@ -17,7 +17,8 @@ export class TaskManagerComponent {
     private fb: FormBuilder,
     private _taskService: TaskService,
     private toastr: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -53,11 +54,12 @@ export class TaskManagerComponent {
       if(this.isEditMode && this.taskId){
        this._taskService.updateTask(this.taskId, this.addTask.value).subscribe(
         (res : any) => {
-          this.toastr.info(`Task Update Successfully!!`, `Success!!`, {
+          this.toastr.info(`Task Updated Successfully!!`, `Success!!`, {
             timeOut: 3000,
             closeButton: true,
             progressBar: true,
-          });          
+          });      
+          this.router.navigate(['dashboard']);    
         },
         (err : any) =>{
           console.error(err);
@@ -73,6 +75,7 @@ export class TaskManagerComponent {
               closeButton: true,
               progressBar: true,
             });
+            this.router.navigate(['dashboard']);
           },
           (err) => {
             console.error(err);

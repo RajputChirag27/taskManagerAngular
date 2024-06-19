@@ -17,7 +17,7 @@ export class TaskService {
   }
 
   getTasks() : Observable<any>{
-    return this.http.get(this.apiUrl);
+    return this.http.get(`${this.apiUrl}/tasksUser`);
   }
 
   deleteTask(id :any){

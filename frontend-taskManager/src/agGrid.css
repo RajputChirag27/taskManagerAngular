@@ -9,7 +9,7 @@
 
  .ag-theme-custom {
      --ag-background-color: #000000;
-     --ag-foreground-color: #605E57;
+     --ag-foreground-color: #4f696d;
      --ag-text-color: var(--ag-foreground-color);
      --ag-accent-color: #0086F4;
      --ag-invalid-color: #e02525;
@@ -36,7 +36,7 @@
      --ag-header-text-color: #F1EFEC;
      --ag-header-cell-hover-background-color: transparent;
      --ag-header-cell-hover-background-transition-duration: 0.2s;
-     --ag-data-color: #FADFB8;
+     --ag-data-color: #b8ebfa;
      --ag-subtle-text-color: color-mix(in srgb, transparent, var(--ag-text-color) 50%);
      --ag-range-selection-border-style: solid;
      --ag-range-selection-border-color: var(--ag-accent-color);
