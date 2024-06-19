@@ -1,8 +1,12 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
 import { ITaskService } from '../interfaces/services/ITaskService';
 import { controller, httpGet, httpPost, httpPut, httpDelete } from 'inversify-express-utils';
 import { TYPES } from '../constants';
+import { ApiHandler } from '../handlers/apiHandler';
+import { CustomError } from '../helpers';
+import { statusCode } from '../constants';
+import { errorHandler } from '../handlers';
 @controller('/tasks')
 export class TaskController {
   constructor(@inject(TYPES.TaskService) private taskService: ITaskService) {}
@@ -15,7 +19,7 @@ export class TaskController {
 
   @httpGet('/:id')
   public async getTaskById(req: Request, res: Response): Promise<void> {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
     const task = await this.taskService.getTaskById(id);
     if (task) {
       res.json(task);
@@ -30,9 +34,9 @@ export class TaskController {
     res.status(201).json(task);
   }
 
-  @httpPut('')
+  @httpPut('/:id')
   public async updateTask(req: Request, res: Response): Promise<void> {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
     const task = await this.taskService.updateTask(id, req.body);
     if (task) {
       res.json(task);
@@ -41,10 +45,24 @@ export class TaskController {
     }
   }
 
-  @httpDelete('')
-  public async deleteTask(req: Request, res: Response): Promise<void> {
-    const id = parseInt(req.params.id, 10);
-    await this.taskService.deleteTask(id);
-    res.status(204).send();
+  @httpDelete('/:id')
+  public async deleteTask(req: Request, res: Response, next : NextFunction): Promise<void> {
+    try{
+      const id = req.params.id;
+      const result = await this.taskService.deleteTask(id);
+      console.log("result "+result)
+      if(result!== null){
+        res.send(new ApiHandler(result, "Task Deleted Successfully"));
+      } else {
+        throw new CustomError(
+          "User Not Deleted",
+          statusCode.BAD_REQUEST,
+          "User is not Deleted because User Not Found",
+        );
+      }
+    } catch(err){
+      if (!res.headersSent) errorHandler(req, res, next, err);
+    }
+   
   }
 }

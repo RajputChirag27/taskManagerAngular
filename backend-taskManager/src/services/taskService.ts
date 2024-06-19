@@ -9,7 +9,7 @@ export class TaskService implements ITaskService {
     return await Task.find();
   }
 
-  async getTaskById(id: number): Promise<ITask | null> {
+  async getTaskById(id: string): Promise<ITask | null> {
     return await Task.findById(id);
   }
 
@@ -18,11 +18,11 @@ export class TaskService implements ITaskService {
     return await newTask.save();
   }
 
-  async updateTask(id: number, taskUpdates: Partial<ITask>): Promise<ITask | null> {
+  async updateTask(id: string, taskUpdates: Partial<ITask>): Promise<ITask | null> {
     return await Task.findByIdAndUpdate(id, taskUpdates, { new: true });
   }
 
-  async deleteTask(id: number): Promise<void> {
-    await Task.findByIdAndDelete(id);
+  async deleteTask(id: string): Promise<any> {
+   return await Task.findByIdAndDelete(id);
   }
 }

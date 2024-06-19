@@ -22,7 +22,7 @@ export const errorHandler = (
       return res.status(err.statusCode || 500).json({
         success: false,
         error: err.message,
-        // errors : err
+        errorName : err.name
       });
     } else {
       throw new CustomError(

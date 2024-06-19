@@ -17,6 +17,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { TaskManagerComponent } from './task-manager/task-manager.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AgGridAngular } from 'ag-grid-angular'; 
+import { DatePipe } from '@angular/common';
+import { AboutUsComponent } from './about-us/about-us.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +32,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HomePageComponent,
     TaskManagerComponent,
     UserProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AgGridAngular
   ],
   providers: [
     AuthService,
@@ -44,7 +50,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

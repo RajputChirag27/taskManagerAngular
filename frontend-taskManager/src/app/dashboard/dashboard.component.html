@@ -1,2 +1,15 @@
-<p>dashboard works!</p>
-{{tasks | json}}
+<div class="d-flex flex-column justify-content-center align-items-center my-5">
+  <h1 class="mb-3">Task Reports</h1>
+  <ag-grid-angular
+  class="ag-theme-custom"
+  style="width: 90%; height: 55.75vh;"
+  [pagination]="true"
+  [rowSelection]="rowSelection"
+  [suppressRowClickSelection]="true"
+  [groupSelectsChildren]="true"
+  [paginationPageSize]="paginationPageSize"
+  [paginationPageSizeSelector]="paginationPageSizeSelector"
+  [rowData]="rowData"
+  [columnDefs]="colDefs">
+  </ag-grid-angular>
+</div>

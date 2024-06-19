@@ -2,8 +2,8 @@ import { ITask } from "../ITask";
 
 export interface ITaskService {
   getAllTasks(): Promise<ITask[]>;
-  getTaskById(id: number): Promise<ITask | null>;
+  getTaskById(id: string): Promise<ITask | null>;
   createTask(task: ITask): Promise<ITask>;
-  updateTask(id: number, task: Partial<ITask>): Promise<ITask | null>;
-  deleteTask(id: number): Promise<void>;
+  updateTask(id: string, task: Partial<ITask>): Promise<ITask | null>;
+  deleteTask(id: string): Promise<any>;
 }
